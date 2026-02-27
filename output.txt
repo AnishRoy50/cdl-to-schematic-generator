@@ -1,8 +1,8 @@
 ========================================================================
-  SUBCIRCUIT: t6p75_nd2x2_zcl
+  SUBCIRCUIT: t6p75_nd2x1_zcl
   Ports:      A B VNW_N VPW_P Z VDD VSS
   Pin Info:   A:I  B:I  Z:O  VNW_N:B  VPW_P:B  VDD:B  VSS:B
-  Components: 6 MOSFET
+  Components: 4 MOSFET
 ========================================================================
 
                  VDD                     VDD
@@ -19,17 +19,9 @@
                          ||---+
                       A -||   |   MN0 NMOS
                          ||---+
-                              |  net8
-                         ||---+
-                      A -||   |   MN2 NMOS
-                         ||---+
                               |  net7
                          ||---+
                       B -||   |   MN1 NMOS
-                         ||---+
-                              |  VSS
-                         ||---+
-                      B -||   |   MN3 NMOS
                          ||---+
                               |
                               |
