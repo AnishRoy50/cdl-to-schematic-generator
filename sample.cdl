@@ -1,0 +1,15 @@
+.SUBCKT t6p75_nd2x2_zcl A B VNW_N VPW_P Z VDD VSS
+*.PININFO A:I B:I Z:O VNW_N:B VPW_P:B VDD:B VSS:B
+MP1 Z A VDD VPW_P lvtpfet m=1 w=300n l=28n nf=2 p_la=0 ulp=0 ngcon=1 analog=0 
++ acv_opt=-1.0 swrfmhc_local=0 eanalog=0 coag=0
+MP3 Z B VDD VPW_P lvtpfet m=1 w=300n l=28n nf=2 p_la=0 ulp=0 ngcon=1 analog=0 
++ acv_opt=-1.0 swrfmhc_local=0 eanalog=0 coag=0
+MN0 Z A net8 VNW_N lvtnfet m=1 w=150n l=28n nf=1 p_la=0 ulp=0 ngcon=1 analog=0 
++ acv_opt=-1.0 swrfmhc_local=0 eanalog=0 coag=0
+MN1 net8 B VSS VNW_N lvtnfet m=1 w=150n l=28n nf=1 p_la=0 ulp=0 ngcon=1 
++ analog=0 acv_opt=-1.0 swrfmhc_local=0 eanalog=0 coag=0
+MN2 Z A net7 VNW_N lvtnfet m=1 w=150n l=28n nf=1 p_la=0 ulp=0 ngcon=1 analog=0 
++ acv_opt=-1.0 swrfmhc_local=0 eanalog=0 coag=0
+MN3 net7 B VSS VNW_N lvtnfet m=1 w=150n l=28n nf=1 p_la=0 ulp=0 ngcon=1 
++ analog=0 acv_opt=-1.0 swrfmhc_local=0 eanalog=0 coag=0
+.ENDS
