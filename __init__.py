@@ -22,10 +22,6 @@ from models import (
     Component,
     MOSFET,
     SubcktInstance,
-    Resistor,
-    Capacitor,
-    Diode,
-    BJT,
     Subckt,
     Circuit,
 )
@@ -37,7 +33,7 @@ from builder import SchematicBuilder
 __all__ = [
     # Models
     "ComponentType", "MOSType", "Net", "Component",
-    "MOSFET", "SubcktInstance", "Resistor", "Capacitor", "Diode", "BJT",
+    "MOSFET", "SubcktInstance",
     "Subckt", "Circuit",
     # Parser
     "NetlistParser",

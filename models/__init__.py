@@ -11,10 +11,6 @@ from .components import (
     Component,
     MOSFET,
     SubcktInstance,
-    Resistor,
-    Capacitor,
-    Diode,
-    BJT,
 )
 from .circuit import Subckt, Circuit
 
@@ -25,10 +21,6 @@ __all__ = [
     "Component",
     "MOSFET",
     "SubcktInstance",
-    "Resistor",
-    "Capacitor",
-    "Diode",
-    "BJT",
     "Subckt",
     "Circuit",
 ]

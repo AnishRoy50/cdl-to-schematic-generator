@@ -7,8 +7,8 @@ import re
 from typing import Dict, List, Optional
 
 from models import (
-    BJT, Capacitor, Circuit, Component, Diode, MOSFET,
-    MOSType, Resistor, SubcktInstance, Subckt,
+    Circuit, Component, MOSFET,
+    MOSType, SubcktInstance, Subckt,
 )
 
 logger = logging.getLogger("cdl2schematic")
@@ -25,10 +25,6 @@ class NetlistParser:
         self._dispatch = {
             "M": self._parse_mosfet,
             "X": self._parse_subckt_instance,
-            "R": lambda line: self._parse_two_terminal(line, Resistor),
-            "C": lambda line: self._parse_two_terminal(line, Capacitor),
-            "D": lambda line: self._parse_two_terminal(line, Diode),
-            "Q": self._parse_bjt,
         }
 
     # ── public API ─────────────────────────────────────────────────────────
@@ -128,13 +124,6 @@ class NetlistParser:
         return MOSFET(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4],
                       model, mos_type, self._split_params(tokens[6:]))
 
-    def _parse_two_terminal(self, line: str, cls) -> Optional[Component]:
-        """Parse a two-terminal component (R, C, or D)."""
-        tokens = line.split()
-        if len(tokens) < 3:
-            return None
-        return cls(tokens[0], tokens[1], tokens[2], self._split_params(tokens[3:]))
-
     def _parse_subckt_instance(self, line: str) -> Optional[SubcktInstance]:
         tokens = line.split()
         if len(tokens) < 3:
@@ -147,14 +136,3 @@ class NetlistParser:
         connections = {f"pin{i}": n for i, n in enumerate(net_section[:-1])}
         return SubcktInstance(tokens[0], net_section[-1], connections,
                               self._split_params(tokens[param_start:]))
-
-    def _parse_bjt(self, line: str) -> Optional[BJT]:
-        tokens = line.split()
-        if len(tokens) < 4:
-            return None
-        substrate = tokens[4] if len(tokens) > 4 and "=" not in tokens[4] else ""
-        mi = 5 if substrate else 4
-        model = tokens[mi] if len(tokens) > mi and "=" not in tokens[mi] else ""
-        start = mi + (1 if model else 0)
-        return BJT(tokens[0], tokens[1], tokens[2], tokens[3],
-                   substrate, model, self._split_params(tokens[start:]))
