@@ -1,10 +1,4 @@
-"""Placement data-classes consumed by the ASCII renderer.
-
-Each placement type describes *what* to draw and *where* (wire-column
-position).  The :class:`~cdl_to_schematic.layout.engine.LayoutEngine`
-produces a list of these objects; the
-:class:`~cdl_to_schematic.renderer.ascii_renderer.ASCIIRenderer` consumes them.
-"""
+"""Placement data-classes consumed by the ASCII renderer."""
 
 from __future__ import annotations
 
@@ -16,20 +10,17 @@ from models import Component, MOSFET
 
 @dataclass
 class CMOSGatePlacement:
-    """A CMOS logic gate with complementary pull-up and pull-down networks.
-
-    Handles inverters, NAND, NOR, and arbitrary CMOS topologies by
-    classifying pull-up (PMOS) and pull-down (NMOS) networks as
-    ``"parallel"`` or ``"series"``.
-    """
-    pullup_mos: List[MOSFET]       # PMOS transistors (pull-up network)
-    pulldown_mos: List[MOSFET]     # NMOS transistors (pull-down network)
-    pullup_topology: str           # "parallel" or "series"
-    pulldown_topology: str         # "parallel" or "series"
+    """A CMOS logic gate with complementary pull-up and pull-down networks."""
+    pullup_mos: List[MOSFET]
+    pulldown_mos: List[MOSFET]
+    pullup_topology: str       # "parallel", "series", or "parallel_series"
+    pulldown_topology: str     # "parallel", "series", or "parallel_series"
+    pullup_chains: List[List[MOSFET]]   # independent series chains
+    pulldown_chains: List[List[MOSFET]]
     output_net: str
     supply_net: str
     ground_net: str
-    wc_mid: int                    # centre wire column
+    wc_mid: int                # centre wire column
 
 
 @dataclass
